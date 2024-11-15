@@ -1,0 +1,90 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template: auto auto / repeat(5, 1fr);
+  gap: 15px;
+}
+
+.dice {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  background-color: white;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+}
+.dice span {
+  font-size: 2rem;
+}
+
+button {
+  grid-column: 2 / span 3;
+  grid-row: 6;
+  border-radius: 8px;
+  padding: 15px 25px;
+  font-size: 1.5rem;
+  font-family: "Karla", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+
+  border: 1px solid rgb(72, 67, 200);
+  background-color: rgb(72, 67, 200);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+
+  color: beige;
+  transition: all 0.3s ease-in;
+}
+
+button:hover {
+  border-color: rgb(61, 57, 165);
+  background-color: rgb(61, 57, 165);
+
+  transition: all 0.3s ease-in;
+}
+
+button:focus {
+  border-color: rgb(61, 57, 165);
+  background-color: rgb(61, 57, 165);
+  outline: 3px solid rgb(61, 57, 165);
+  outline-offset: 3px;
+}
+
+button:active {
+  border-color: rgb(50, 47, 133);
+  background-color: rgb(50, 47, 133);
+  transition: all 0.3s ease-in;
+}
