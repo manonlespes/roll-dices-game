@@ -51,6 +51,10 @@ h1 {
   font-size: 2rem;
 }
 
+.dice.colored {
+  background-color: #59e391;
+}
+
 button {
   grid-column: 2 / span 3;
   grid-row: 6;
