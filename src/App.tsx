@@ -6,7 +6,9 @@ import { diesArrayType } from "./types/dice";
 import ReactConfetti from "react-confetti";
 
 function App() {
-  const [dices, setDices] = useState(getDices());
+  // use state receive a fct in callback
+  // avoid re-render the App component each time the state changes
+  const [dices, setDices] = useState(() => getDices());
 
   const isGameWon = dices.every(
     (dice) => dice.value === dices[0].value && dice.isHeld
@@ -56,8 +58,18 @@ function App() {
       <div className="container">
         {isGameWon && <ReactConfetti />}
 
-        {/*  <h1 className="title">Tenzies</h1>
-      <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p> */}
+        {isGameWon && (
+          <div aria-live="polite" className="sr-only">
+            <p>Congratulations! You won! Press "New Game" to start again.</p>
+          </div>
+        )}
+        <div className="header">
+          <h1 className="title">Tenzies</h1>
+          <p className="instructions">
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>
+        </div>
         <div className="wrapper">
           {dices.map((diceValue: diesArrayType) => {
             return (
@@ -69,7 +81,7 @@ function App() {
               </Fragment>
             );
           })}
-          <button type="button" onClick={rollDice}>
+          <button className="submit" type="button" onClick={rollDice}>
             {isGameWon ? "New Game" : "Roll"}
           </button>
         </div>
