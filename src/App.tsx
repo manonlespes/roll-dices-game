@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Dice } from "./Dice";
 import { v4 as uuidv4 } from "uuid";
@@ -9,10 +9,17 @@ function App() {
   // use state receive a fct in callback
   // avoid re-render the App component each time the state changes
   const [dices, setDices] = useState(() => getDices());
+  const buttonRef = useRef<null | HTMLButtonElement>(null);
 
   const isGameWon = dices.every(
     (dice) => dice.value === dices[0].value && dice.isHeld
   );
+
+  useEffect(() => {
+    if (isGameWon && buttonRef.current != null) {
+      buttonRef.current.focus();
+    }
+  }, [isGameWon]);
 
   function generateNewDice() {
     const random = Math.ceil(Math.random() * 6);
@@ -58,11 +65,12 @@ function App() {
       <div className="container">
         {isGameWon && <ReactConfetti />}
 
-        {isGameWon && (
-          <div aria-live="polite" className="sr-only">
+        <div aria-live="polite" className="sr-only">
+          {isGameWon && (
             <p>Congratulations! You won! Press "New Game" to start again.</p>
-          </div>
-        )}
+          )}
+        </div>
+
         <div className="header">
           <h1 className="title">Tenzies</h1>
           <p className="instructions">
@@ -81,7 +89,12 @@ function App() {
               </Fragment>
             );
           })}
-          <button className="submit" type="button" onClick={rollDice}>
+          <button
+            ref={buttonRef}
+            className="submit"
+            type="button"
+            onClick={rollDice}
+          >
             {isGameWon ? "New Game" : "Roll"}
           </button>
         </div>
